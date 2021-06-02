@@ -1,13 +1,8 @@
 query GetCountriesForTesting {
-  countries {
-    name
-    provinces {
-      name
-    }
-    currency {
-      code
-      symbol
-      name
-    }
+  movies {
+    title
+    cast
+    genres
+    year
   }
 }
