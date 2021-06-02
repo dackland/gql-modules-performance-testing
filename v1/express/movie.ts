@@ -1,5 +1,5 @@
 import { createModule, gql } from "graphql-modules";
-const data = require("../../movies/data.json");
+const data = require("../../movies.json");
 
 export const MovieModule = createModule({
   id: "movies",

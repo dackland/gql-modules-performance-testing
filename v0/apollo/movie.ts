@@ -1,10 +1,9 @@
-import { createModule, gql } from "graphql-modules";
+import { GraphQLModule } from "@graphql-modules/core";
 const data = require("../../movies.json");
 
-export const MovieModule = createModule({
-  id: "movies",
-  dirname: __dirname,
-  typeDefs: gql`
+export const MovieModule = new GraphQLModule({
+  name: "movie",
+  typeDefs: `
     type Movie {
       title: String!
       year: Int!

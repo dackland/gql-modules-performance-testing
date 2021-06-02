@@ -1,15 +1,12 @@
 {
-  "name": "gql-modules-performance-testing",
+  "name": "v1-apollo",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "ts-node ./index.ts",
-    "build": "tsc",
-    "test:performance": "k6 run --vus 10 --duration 1s performance_testing/performance_test.ts"
+    "start": "ts-node ./index.ts"
   },
   "dependencies": {
-    "@types/express": "^4.17.12",
     "@types/node": "^15.6.1",
     "apollo-server": "^2.25.0",
     "graphql": "^15.5.0",

@@ -1,8 +1,0 @@
-query GetCountriesForTesting {
-  movies {
-    title
-    cast
-    genres
-    year
-  }
-}
