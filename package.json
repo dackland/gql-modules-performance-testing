@@ -4,6 +4,6 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "test:performance": "k6 run --vus 10 --duration 3s ./performance_test.ts"
+    "test:performance": "k6 run --duration 10s --summary-trend-stats='med,min,max,count' ./performance_test.js"
   }
 }

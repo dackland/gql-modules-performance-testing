@@ -1,0 +1,13 @@
+{
+  "name": "standalone",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.25.0",
+    "graphql": "^15.5.0"
+  }
+}
