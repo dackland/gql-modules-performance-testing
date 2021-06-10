@@ -14,12 +14,16 @@ const ApplicationModule = new GraphQLModule({
           genres: [String!]!
         }
         type Query {
-          movies: [Movie!]!
+          movies: [Movie!]!,
+          movie(title: String): Movie
         }
       `,
       resolvers: {
         Query: {
           movies: () => data,
+          movie: (root, args, context, info) => {
+            return data.find(movie => movie.title === args.title);
+          }
         },
       },
     }),
