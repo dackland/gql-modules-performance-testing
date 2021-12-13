@@ -2,7 +2,7 @@ const { createApplication, createModule, gql } = require("graphql-modules");
 const { ApolloServer } = require("apollo-server");
 const data = require("../movies.json");
 
-const app = createApplication({
+const { typeDefs, resolvers, createOperationController } = createApplication({
   modules: [
     createModule({
       id: "movies",
@@ -36,20 +36,14 @@ const app = createApplication({
 
 const contextDestroyMap = new WeakMap();
 const server = new ApolloServer({
-  typeDefs: app.typeDefs,
-  resolvers: app.resolvers,
+  typeDefs,
+  resolvers,
   context: (inputContext) => {
-    const { context, destroy } = app.createOperationController({
+    const { context } = createOperationController({
       inputContext,
+      autoDestroy: true,
     });
-    contextDestroyMap.set(context, destroy);
     return context;
-  },
-  formatResponse: (res, { context }) => {
-    //  const destroy = contextDestroyMap.get(context);
-    //  destroy();
-    //  contextDestroyMap.delete(context);
-    return res;
   },
 });
 
