@@ -1,5 +1,5 @@
 {
-  "name": "standalone",
+  "name": "v2",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.6.0",
-    "graphql": "^17.0.0-alpha.2.canary.pr.3791.e6d3ec58026d75b71b7b84c3da5f376ec7eeca94"
+    "graphql": "^16.6.0",
+    "graphql-modules": "^2.1.2"
   }
 }

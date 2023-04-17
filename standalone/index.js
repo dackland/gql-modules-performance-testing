@@ -1,8 +1,13 @@
-const { ApolloServer, makeExecutableSchema } = require("apollo-server");
+const { ApolloServer, makeExecutableSchema } = require("@apollo/server");
+const { startStandaloneServer } = require("@apollo/server/standalone");
 const data = require("../movies.json");
 
-const schema = makeExecutableSchema({
-  typeDefs: `
+const typeDefs = `
+directive @defer(
+  if: Boolean
+  label: String
+) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+directive @stream(if: Boolean, label: String, initialCount: Int = 0) on FIELD
     type Movie {
       title: String!
       year: Int!
@@ -13,19 +18,21 @@ const schema = makeExecutableSchema({
       movies: [Movie!]!,
       movie(title: String): Movie 
     }
-  `,
-  resolvers: {
-    Query: {
-      movies: () => data,
-      movie: (root, args, context, info) => {
-        return data.find(movie => movie.title === args.title);
-      }
+  `;
+const resolvers = {
+  Query: {
+    movies: () => data,
+    movie: (root, args, context, info) => {
+      return data.find((movie) => movie.title === args.title);
     },
   },
-});
+};
 
-const server = new ApolloServer({ schema });
-
-server.listen().then(({ url }) => {
+(async () => {
+  const server = new ApolloServer({ typeDefs, resolvers });
+  const { url } = await startStandaloneServer(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+    listen: { port: 4000 },
+  });
   console.log(`🚀  Server ready at ${url}`);
-});
+})();
